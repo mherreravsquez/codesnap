@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>CodeSnap</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+<div class="app">
+    <div class="workspace">
+        <div class="editor-panel">
+            <div>
+                <textarea id="codeInput" class="code-input" rows="12" spellcheck="false" placeholder="Pega aqui tu fragmento de codigo con comentarios...&#10;&#10;Ejemplo:&#10;// Funcion principal&#10;function sumar(a, b) {&#10;    return a + b; // retorna suma&#10;}"></textarea>
+            </div>
+            <div class="controls">
+                <button id="exportBtn" class="btn-export">Exportar PNG (HD · 4:3)</button>
+                <div class="hint">Vista previa en tiempo real | Proporcion 4:3 automatica</div>
+            </div>
+            <div class="info-note">
+                El IDE se redimensiona para mostrar todo el codigo sin scroll vertical.<br>
+                Formato horizontal 4:3 · Alta definicion al exportar (escala x2).
+            </div>
+        </div>
+
+        <div class="preview-panel">
+            <div class="preview-label">Vista previa del render (IDE ficticio)</div>
+            <div class="render-wrapper" id="renderWrapper">
+                <div id="ideWindow" class="ide-window">
+                    <div class="window-bar">
+                        <div class="window-dots">
+                            <div class="dot dot-red"></div>
+                            <div class="dot dot-yellow"></div>
+                            <div class="dot dot-green"></div>
+                        </div>
+                        <div class="window-title">code_snippet.ts</div>
+                        <div style="flex:1"></div>
+                    </div>
+                    <div class="code-area">
+                        <pre><code id="codePreview" class="language-plain"></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="toastMsg" class="toast-msg">PNG exportado en HD · 4:3</div>
+<script src="script.js"></script>
+</body>
+</html>
