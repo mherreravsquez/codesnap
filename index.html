@@ -12,20 +12,19 @@
     <div class="workspace">
         <div class="editor-panel">
             <div>
-                <textarea id="codeInput" class="code-input" rows="12" spellcheck="false" placeholder="Pega aqui tu fragmento de codigo con comentarios...&#10;&#10;Ejemplo:&#10;// Funcion principal&#10;function sumar(a, b) {&#10;    return a + b; // retorna suma&#10;}"></textarea>
+                <textarea id="codeInput" class="code-input" rows="12" spellcheck="false" placeholder="Paste your code snippet with comments here...&#10;&#10;Example:&#10;// Main function&#10;function add(a, b) {&#10;    return a + b; // returns the sum&#10;}"></textarea>
             </div>
             <div class="controls">
-                <button id="exportBtn" class="btn-export">Exportar PNG (HD · 4:3)</button>
-                <div class="hint">Vista previa en tiempo real | Proporcion 4:3 automatica</div>
+                <button id="exportBtn" class="btn-export">Export PNG</button>
             </div>
             <div class="info-note">
-                El IDE se redimensiona para mostrar todo el codigo sin scroll vertical.<br>
-                Formato horizontal 4:3 · Alta definicion al exportar (escala x2).
+                The IDE resizes to display all the code without vertical scrolling.<br>
+                4:3 horizontal aspect ratio · High definition when exporting (2x scaling).
             </div>
         </div>
 
         <div class="preview-panel">
-            <div class="preview-label">Vista previa del render (IDE ficticio)</div>
+            <div class="preview-label">Render preview</div>
             <div class="render-wrapper" id="renderWrapper">
                 <div id="ideWindow" class="ide-window">
                     <div class="window-bar">
@@ -45,7 +44,7 @@
         </div>
     </div>
 </div>
-<div id="toastMsg" class="toast-msg">PNG exportado en HD · 4:3</div>
+<div id="toastMsg" class="toast-msg">Exported as an PNG</div>
 <script src="script.js"></script>
 </body>
 </html>

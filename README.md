@@ -43,10 +43,10 @@ Generate 4:3 landscape-format PNG images of code snippets with a minimalist IDE 
 
 ### Online use
 
-1. Go to [CodeSnap]() 
+1. Go to [mherreravsquez.github.io/codesnap/](https://mherreravsquez.github.io/codesnap/) 
 2. Type or paste your code into the left panel.
 3. View the preview in the right panel.
-4. Click Export PNG (HD · 4:3) to download the image.
+4. Click Export PNG to download the image.
 
 ### Local Use
 
@@ -59,7 +59,7 @@ Generate 4:3 landscape-format PNG images of code snippets with a minimalist IDE 
 2. Open the index.html file in your browser.
 3. Type or paste your code into the left panel.
 4. View the preview in the right panel.
-5. Click Export PNG (HD · 4:3) to download the image.
+5. Click Export PNG to download the image.
 
 ---
 
