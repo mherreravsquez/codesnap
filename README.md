@@ -128,7 +128,7 @@ You can modify the CSS variables in `styles.css` within the `:root` block to cha
 
 ## License
 
-This project is open source and free to use for any streaming or personal purpose. No attribution required, but it is appreciated.
+This project is open source and free to use for any comercial or personal purpose. No attribution required, but it is appreciated.
 
 ---
 
