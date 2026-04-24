@@ -22,6 +22,19 @@
     --btn-active: #1f242c;
     --accent-blue: #388bfd;
 
+    /* Syntax token colors — GitHub Dark palette */
+    --syn-comment:  #8b949e;   /* gray */
+    --syn-keyword:  #ff7b72;   /* coral / red */
+    --syn-string:   #a5d6ff;   /* sky blue */
+    --syn-number:   #79c0ff;   /* blue */
+    --syn-function: #d2a8ff;   /* purple */
+    --syn-type:     #ffa657;   /* orange */
+    --syn-operator: #ff7b72;   /* coral */
+    --syn-tag:      #7ee787;   /* green (HTML tags) */
+    --syn-attr:     #79c0ff;   /* blue (HTML attributes) */
+    --syn-variable: #ffa657;   /* orange */
+    --syn-builtin:  #79c0ff;   /* blue */
+
     /* Typography */
     --font-mono: 'Fira Code', 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
@@ -137,6 +150,96 @@ body {
     gap: 1.5rem;
 }
 
+/* ========== LANGUAGE SELECTOR ========== */
+.language-selector-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.language-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+}
+
+.language-select {
+    background: var(--bg-code);
+    color: var(--text-primary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    font-family: var(--font-sans);
+    cursor: pointer;
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    appearance: none;
+    -webkit-appearance: none;
+    /* Custom dropdown arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b949e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.6rem center;
+    padding-right: 2rem;
+}
+
+.language-select:hover {
+    border-color: var(--border-light);
+}
+
+.language-select:focus {
+    border-color: var(--accent-blue);
+    box-shadow: var(--box-shadow);
+}
+
+.language-select option {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+}
+
+/* ========== FILENAME INPUT ========== */
+.filename-row {
+    gap: 0.5rem;
+}
+
+.filename-input {
+    flex: 1;
+    background: var(--bg-code);
+    color: var(--text-primary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    min-width: 0;
+}
+
+.filename-input::placeholder {
+    color: var(--text-muted);
+}
+
+.filename-input:hover {
+    border-color: var(--border-light);
+}
+
+.filename-input:focus {
+    border-color: var(--accent-blue);
+    box-shadow: var(--box-shadow);
+}
+
+.filename-ext {
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    white-space: nowrap;
+    user-select: none;
+}
+
+/* ========== CODE TEXTAREA ========== */
 .code-input {
     width: 100%;
     background: var(--bg-code);
@@ -275,9 +378,9 @@ body {
     border-radius: 50%;
 }
 
-.dot-red { background: #ff5f56; }
+.dot-red    { background: #ff5f56; }
 .dot-yellow { background: #ffbd2e; }
-.dot-green { background: #27c93f; }
+.dot-green  { background: #27c93f; }
 
 .window-title {
     font-size: 0.7rem;
@@ -315,11 +418,124 @@ body {
     background: transparent;
 }
 
+/* Plain-text mode: comment highlight */
 .comment-highlight {
-    color: var(--text-muted);
+    color: var(--syn-comment);
     font-style: normal;
 }
 
+/* ========== PRISM TOKEN OVERRIDES (GitHub Dark) ========== */
+
+/* Reset any Prism default background */
+code[class*="language-"],
+pre[class*="language-"] {
+    background: transparent !important;
+    text-shadow: none !important;
+    font-family: var(--font-mono) !important;
+    font-size: inherit;
+    color: var(--text-primary);
+}
+
+/* Comments */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: var(--syn-comment);
+    font-style: normal;
+}
+
+/* Punctuation */
+.token.punctuation {
+    color: var(--text-primary);
+    opacity: 0.8;
+}
+
+/* Namespaces */
+.token.namespace {
+    opacity: 0.9;
+}
+
+/* Keywords */
+.token.keyword,
+.token.important,
+.token.atrule {
+    color: var(--syn-keyword);
+    font-style: normal;
+}
+
+/* Strings */
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex {
+    color: var(--syn-string);
+}
+
+/* Numbers, booleans, constants */
+.token.number,
+.token.boolean,
+.token.constant,
+.token.symbol,
+.token.inserted {
+    color: var(--syn-number);
+}
+
+/* Operators */
+.token.operator,
+.token.entity,
+.token.url {
+    color: var(--syn-operator);
+    background: transparent;
+}
+
+/* Functions */
+.token.function,
+.token.function-variable {
+    color: var(--syn-function);
+}
+
+/* Classes and types */
+.token.class-name,
+.token.builtin {
+    color: var(--syn-type);
+}
+
+/* Variables */
+.token.variable {
+    color: var(--syn-variable);
+}
+
+/* Tags (HTML/XML) */
+.token.tag {
+    color: var(--syn-tag);
+}
+
+/* Attribute names (HTML/XML) */
+.token.attr-name {
+    color: var(--syn-attr);
+}
+
+/* Property (CSS) */
+.token.property {
+    color: var(--syn-attr);
+}
+
+/* Selectors (CSS) */
+.token.selector {
+    color: var(--syn-tag);
+}
+
+/* Deleted */
+.token.deleted {
+    color: var(--syn-keyword);
+}
+
+/* Bold / Italic inside code */
+.token.bold   { font-weight: bold; }
+.token.italic { font-style: italic; }
+
+/* ========== SCROLLBAR ========== */
 .code-area::-webkit-scrollbar {
     height: 5px;
 }
@@ -332,7 +548,7 @@ body {
     border-radius: 8px;
 }
 
-/* responsive */
+/* ========== RESPONSIVE ========== */
 @media (max-width: 780px) {
     body {
         padding: 1rem;
@@ -390,7 +606,7 @@ body {
     }
     .ide-window {
         max-width: 100%;
-        width: auto !important; 
+        width: auto !important;
         height: auto !important;
     }
     .code-area {
@@ -472,6 +688,10 @@ body {
         font-size: 0.65rem;
         white-space: nowrap;
     }
+    .language-select {
+        font-size: 0.75rem;
+        padding: 0.35rem 1.8rem 0.35rem 0.6rem;
+    }
 }
 
 @media (min-width: 1600px) {
@@ -486,7 +706,7 @@ body {
     }
 }
 
-/* Toast notification */
+/* ========== TOAST ========== */
 .toast-msg {
     position: fixed;
     bottom: 2rem;

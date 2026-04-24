@@ -6,50 +6,92 @@
     <title>CodeSnap</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <!-- Prism.js core (includes markup/HTML, CSS, clike, JS) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Additional language components -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 </head>
 <body>
-    <div class="top-bar">
-        <div class="top-bar-title">CodeSnap</div>
-        <a href="https://github.com/mherreravsquez/codesnap" target="_blank" rel="noopener noreferrer" class="github-link">Source code</a>
-    </div>
-    
-    <div class="app">
-        <div class="workspace">
-            <div class="editor-panel">
-                <div>
-                    <textarea id="codeInput" class="code-input" rows="12" spellcheck="false" placeholder="Paste your code snippet with comments here...&#10;&#10;Example:&#10;// Main function&#10;function add(a, b) {&#10;    return a + b; // returns the sum&#10;}"></textarea>
-                </div>
-                <div class="controls">
-                    <button id="exportBtn" class="btn-export">Export PNG</button>
-                </div>
-                <div class="info-note">
-                    The IDE resizes to display all the code without vertical scrolling.<br>
-                    4:3 horizontal aspect ratio · High definition when exporting (2x scaling).
-                </div>
+<div class="top-bar">
+    <div class="top-bar-title">CodeSnap</div>
+    <a href="https://github.com/mherreravsquez/codesnap" target="_blank" rel="noopener noreferrer" class="github-link">Source code</a>
+</div>
+
+<div class="app">
+    <div class="workspace">
+        <div class="editor-panel">
+            <div class="language-selector-row filename-row">
+                <span class="language-label">Filename</span>
+                <input
+                        type="text"
+                        id="filenameInput"
+                        class="filename-input"
+                        placeholder="code_snippet"
+                        maxlength="48"
+                        spellcheck="false"
+                />
+                <span class="filename-ext" id="filenameExt">.txt</span>
             </div>
-    
-            <div class="preview-panel">
-                <div class="preview-label">Render preview</div>
-                <div class="render-wrapper" id="renderWrapper">
-                    <div id="ideWindow" class="ide-window">
-                        <div class="window-bar">
-                            <div class="window-dots">
-                                <div class="dot dot-red"></div>
-                                <div class="dot dot-yellow"></div>
-                                <div class="dot dot-green"></div>
-                            </div>
-                            <div class="window-title">code_snippet.ts</div>
-                            <div style="flex:1"></div>
+            <div class="language-selector-row">
+                <span class="language-label">Language</span>
+                <select id="languageSelect" class="language-select">
+                    <option value="plaintext">Plain text</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="typescript">TypeScript</option>
+                    <option value="csharp">C#</option>
+                    <option value="python">Python</option>
+                    <option value="markup">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="json">JSON</option>
+                    <option value="java">Java</option>
+                    <option value="cpp">C++</option>
+                    <option value="rust">Rust</option>
+                    <option value="go">Go</option>
+                    <option value="bash">Bash</option>
+                </select>
+            </div>
+            <div>
+                <textarea id="codeInput" class="code-input" rows="12" spellcheck="false" placeholder="Paste your code snippet with comments here...&#10;&#10;Example:&#10;// Main function&#10;function add(a, b) {&#10;    return a + b; // returns the sum&#10;}"></textarea>
+            </div>
+            <div class="controls">
+                <button id="exportBtn" class="btn-export">Export PNG</button>
+            </div>
+            <div class="info-note">
+                The IDE resizes to display all the code without vertical scrolling.<br>
+                4:3 horizontal aspect ratio · High definition when exporting (2x scaling).
+            </div>
+        </div>
+
+        <div class="preview-panel">
+            <div class="preview-label">Render preview</div>
+            <div class="render-wrapper" id="renderWrapper">
+                <div id="ideWindow" class="ide-window">
+                    <div class="window-bar">
+                        <div class="window-dots">
+                            <div class="dot dot-red"></div>
+                            <div class="dot dot-yellow"></div>
+                            <div class="dot dot-green"></div>
                         </div>
-                        <div class="code-area">
-                            <pre><code id="codePreview" class="language-plain"></code></pre>
-                        </div>
+                        <div class="window-title" id="windowTitle">code_snippet.txt</div>
+                        <div style="flex:1"></div>
+                    </div>
+                    <div class="code-area">
+                        <pre><code id="codePreview" class="language-plain"></code></pre>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="toastMsg" class="toast-msg">Exported as an PNG</div>
-    <script src="script.js"></script>
+</div>
+<div id="toastMsg" class="toast-msg">Exported as a PNG</div>
+<script src="script.js"></script>
 </body>
 </html>
