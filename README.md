@@ -1,6 +1,6 @@
 # CodeSnap · Code Rendering for Blogs
 
-> **Version 1.1.0**
+> **Version 1.2.0**
 
 ---
 
@@ -27,6 +27,8 @@ Generate 4:3 landscape-format PNG images of code snippets with a minimalist IDE 
 
 ## Supported Languages
 
+### General
+
 | Language   | Extension |
 |------------|-----------|
 | Plain text | `.txt`    |
@@ -42,6 +44,15 @@ Generate 4:3 landscape-format PNG images of code snippets with a minimalist IDE 
 | Rust       | `.rs`     |
 | Go         | `.go`     |
 | Bash       | `.sh`     |
+
+### Game Development
+
+| Language         | Extension | Used in                              |
+|------------------|-----------|--------------------------------------|
+| GLSL             | `.glsl`   | OpenGL, Unity, Godot, Vulkan         |
+| HLSL             | `.hlsl`   | DirectX, Unity (URP/HDRP shaders)    |
+| GDScript (Godot) | `.gd`     | Godot Engine                         |
+| Lua              | `.lua`    | Roblox, Love2D, many engine scripts  |
 
 ---
 
@@ -96,6 +107,11 @@ You can modify the CSS variables in `styles.css` within the `:root` block to cha
 ---
 
 ## Changelog
+
+### v1.1.1
+- Added game development language support: GLSL, HLSL, GDScript, and Lua.
+- Language dropdown now uses grouped sections (General / Game Development).
+- Added GLSL/HLSL-specific token overrides for preprocessor directives and qualifiers (`in`, `out`, `uniform`, `varying`).
 
 ### v1.1.0
 - Added multi-language syntax highlighting via Prism.js (13 languages).

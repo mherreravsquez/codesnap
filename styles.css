@@ -199,6 +199,26 @@ body {
     color: var(--text-primary);
 }
 
+.language-select optgroup {
+    background: var(--bg-elevated);
+    color: var(--text-muted);
+    font-style: normal;
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* ── GLSL / HLSL: preprocessor directives (#version, #pragma, etc.) ── */
+.token.directive,
+.token.directive-hash,
+.token.macro {
+    color: var(--syn-variable);   /* orange */
+}
+
+.token.qualifier {
+    color: var(--syn-keyword);    /* coral — in/out/uniform/varying */
+}
+
 /* ========== FILENAME INPUT ========== */
 .filename-row {
     gap: 0.5rem;

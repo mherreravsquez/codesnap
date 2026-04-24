@@ -24,6 +24,11 @@
         rust:       'rs',
         go:         'go',
         bash:       'sh',
+        // Game development
+        glsl:       'glsl',
+        hlsl:       'hlsl',
+        gdscript:   'gd',
+        lua:        'lua',
     };
 
     // Disable Prism auto-highlight — we call it manually
@@ -185,18 +190,19 @@
 
     // ── Default code ──────────────────────────────────────────────────────────
     const defaultCode = `// My featured snippet for the blog
-function generateMessage(user) {
-    // Comment: personalized greeting
-    const greeting = \`Hello, \${user}\`;
-    console.log(greeting);   // print to console
-    return greeting;
-}
-
-/* 
- * Usage example:
- * generateMessage("dev_blog");
- */
-generateMessage("Community");`;
+        function generateMessage(user) {
+            // Comment: personalized greeting
+            const greeting = \`Hello, \${user}\`;
+            console.log(greeting);   // print to console
+            return greeting;
+        }
+        
+        /* 
+         * Usage example:
+         * generateMessage("dev_blog");
+         */
+        generateMessage("Community");
+    `;
 
     textarea.value = defaultCode;
     updateCodePreview();

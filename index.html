@@ -18,6 +18,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <!-- Game development languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-glsl.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-hlsl.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-gdscript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lua.min.js"></script>
 </head>
 <body>
 <div class="top-bar">
@@ -43,19 +48,27 @@
             <div class="language-selector-row">
                 <span class="language-label">Language</span>
                 <select id="languageSelect" class="language-select">
-                    <option value="plaintext">Plain text</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="typescript">TypeScript</option>
-                    <option value="csharp">C#</option>
-                    <option value="python">Python</option>
-                    <option value="markup">HTML</option>
-                    <option value="css">CSS</option>
-                    <option value="json">JSON</option>
-                    <option value="java">Java</option>
-                    <option value="cpp">C++</option>
-                    <option value="rust">Rust</option>
-                    <option value="go">Go</option>
-                    <option value="bash">Bash</option>
+                    <optgroup label="General">
+                        <option value="plaintext">Plain text</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="typescript">TypeScript</option>
+                        <option value="csharp">C#</option>
+                        <option value="python">Python</option>
+                        <option value="markup">HTML</option>
+                        <option value="css">CSS</option>
+                        <option value="json">JSON</option>
+                        <option value="java">Java</option>
+                        <option value="cpp">C++</option>
+                        <option value="rust">Rust</option>
+                        <option value="go">Go</option>
+                        <option value="bash">Bash</option>
+                    </optgroup>
+                    <optgroup label="Game Development">
+                        <option value="glsl">GLSL</option>
+                        <option value="hlsl">HLSL</option>
+                        <option value="gdscript">GDScript (Godot)</option>
+                        <option value="lua">Lua</option>
+                    </optgroup>
                 </select>
             </div>
             <div>
