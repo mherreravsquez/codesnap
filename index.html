@@ -6,9 +6,9 @@
     <title>CodeSnap</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <!-- Prism.js core (includes markup/HTML, CSS, clike, JS) -->
+    <!-- Prism.js core (markup, CSS, clike, JS) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <!-- Additional language components -->
+    <!-- General languages -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
@@ -26,27 +26,25 @@
 </head>
 <body>
 <div class="top-bar">
-    <div class="top-bar-title">CodeSnap</div>
+    <div class="top-bar-title">CodeSnap Light</div>
     <a href="https://github.com/mherreravsquez/codesnap" target="_blank" rel="noopener noreferrer" class="github-link">Source code</a>
 </div>
 
 <div class="app">
     <div class="workspace">
         <div class="editor-panel">
-            <div class="language-selector-row filename-row">
-                <span class="language-label">Filename</span>
-                <input
-                        type="text"
-                        id="filenameInput"
-                        class="filename-input"
-                        placeholder="code_snippet"
-                        maxlength="48"
-                        spellcheck="false"
-                />
+
+            <!-- Filename -->
+            <div class="control-row">
+                <span class="row-label">Filename</span>
+                <input type="text" id="filenameInput" class="filename-input"
+                       placeholder="code_snippet" maxlength="48" spellcheck="false" />
                 <span class="filename-ext" id="filenameExt">.txt</span>
             </div>
-            <div class="language-selector-row">
-                <span class="language-label">Language</span>
+
+            <!-- Language -->
+            <div class="control-row">
+                <span class="row-label">Language</span>
                 <select id="languageSelect" class="language-select">
                     <optgroup label="General">
                         <option value="plaintext">Plain text</option>
@@ -71,15 +69,51 @@
                     </optgroup>
                 </select>
             </div>
-            <div>
-                <textarea id="codeInput" class="code-input" rows="12" spellcheck="false" placeholder="Paste your code snippet with comments here...&#10;&#10;Example:&#10;// Main function&#10;function add(a, b) {&#10;    return a + b; // returns the sum&#10;}"></textarea>
+
+            <!-- OS Chrome -->
+            <div class="control-row">
+                <span class="row-label">Chrome</span>
+                <div class="segmented" id="osSelector">
+                    <button class="seg-btn active" data-os="macos">macOS</button>
+                    <button class="seg-btn" data-os="windows">Windows</button>
+                    <button class="seg-btn" data-os="linux">Linux</button>
+                </div>
             </div>
+
+            <!-- Theme -->
+            <div class="control-row">
+                <span class="row-label">Theme</span>
+                <div class="theme-swatches" id="themeSwatches">
+                    <button class="swatch active" data-theme="github-dark" title="GitHub Dark"
+                            style="background:linear-gradient(135deg,#101722 55%,#ff7b72 55%)"></button>
+                    <button class="swatch" data-theme="dracula"   title="Dracula"
+                            style="background:linear-gradient(135deg,#282a36 55%,#ff79c6 55%)"></button>
+                    <button class="swatch" data-theme="nord"      title="Nord"
+                            style="background:linear-gradient(135deg,#2e3440 55%,#88c0d0 55%)"></button>
+                    <button class="swatch" data-theme="monokai"   title="Monokai"
+                            style="background:linear-gradient(135deg,#272822 55%,#a6e22e 55%)"></button>
+                    <button class="swatch" data-theme="one-dark"  title="One Dark"
+                            style="background:linear-gradient(135deg,#282c34 55%,#61afef 55%)"></button>
+                    <button class="swatch" data-theme="rider"     title="Rider (Darcula)"
+                            style="background:linear-gradient(135deg,#2b2b2b 55%,#cc7832 55%)"></button>
+                    <button class="swatch" data-theme="vs-dark"   title="Visual Studio Dark"
+                            style="background:linear-gradient(135deg,#1e1e1e 55%,#569cd6 55%)"></button>
+                </div>
+            </div>
+
+            <!-- Code textarea -->
+            <div>
+                    <textarea id="codeInput" class="code-input" rows="12" spellcheck="false"
+                              placeholder="Paste your code snippet here...&#10;&#10;// Main function&#10;function add(a, b) {&#10;    return a + b;&#10;}"></textarea>
+            </div>
+
             <div class="controls">
                 <button id="exportBtn" class="btn-export">Export PNG</button>
             </div>
+
             <div class="info-note">
                 The IDE resizes to display all the code without vertical scrolling.<br>
-                4:3 horizontal aspect ratio · High definition when exporting (2x scaling).
+                4:3 horizontal aspect ratio · High definition when exporting (2.5x scaling).
             </div>
         </div>
 
@@ -87,15 +121,45 @@
             <div class="preview-label">Render preview</div>
             <div class="render-wrapper" id="renderWrapper">
                 <div id="ideWindow" class="ide-window">
-                    <div class="window-bar">
-                        <div class="window-dots">
+
+                    <div class="window-bar" id="windowBar">
+                        <!-- macOS chrome (visible by default) -->
+                        <div class="chrome chrome-macos">
                             <div class="dot dot-red"></div>
                             <div class="dot dot-yellow"></div>
                             <div class="dot dot-green"></div>
                         </div>
+
                         <div class="window-title" id="windowTitle">code_snippet.txt</div>
-                        <div style="flex:1"></div>
+                        <div class="bar-spacer"></div>
+
+                        <!-- Windows chrome -->
+                        <div class="chrome chrome-windows">
+                            <div class="win-btn">
+                                <svg width="10" height="10" viewBox="0 0 10 10"><rect x="0" y="4.5" width="10" height="1" fill="currentColor"/></svg>
+                            </div>
+                            <div class="win-btn">
+                                <svg width="10" height="10" viewBox="0 0 10 10"><rect x="0.5" y="0.5" width="9" height="9" stroke="currentColor" fill="none" stroke-width="1"/></svg>
+                            </div>
+                            <div class="win-btn win-close">
+                                <svg width="10" height="10" viewBox="0 0 10 10"><line x1="0" y1="0" x2="10" y2="10" stroke="currentColor" stroke-width="1.3"/><line x1="10" y1="0" x2="0" y2="10" stroke="currentColor" stroke-width="1.3"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- Linux chrome -->
+                        <div class="chrome chrome-linux">
+                            <div class="linux-btn linux-minimize">
+                                <svg width="7" height="7" viewBox="0 0 8 8"><rect x="0" y="3.5" width="8" height="1" fill="currentColor"/></svg>
+                            </div>
+                            <div class="linux-btn linux-maximize">
+                                <svg width="7" height="7" viewBox="0 0 8 8"><rect x="0.5" y="0.5" width="7" height="7" stroke="currentColor" fill="none" stroke-width="1"/></svg>
+                            </div>
+                            <div class="linux-btn linux-close">
+                                <svg width="7" height="7" viewBox="0 0 8 8"><line x1="0" y1="0" x2="8" y2="8" stroke="currentColor" stroke-width="1.3"/><line x1="8" y1="0" x2="0" y2="8" stroke="currentColor" stroke-width="1.3"/></svg>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="code-area">
                         <pre><code id="codePreview" class="language-plain"></code></pre>
                     </div>
@@ -104,6 +168,7 @@
         </div>
     </div>
 </div>
+
 <div id="toastMsg" class="toast-msg">Exported as a PNG</div>
 <script src="script.js"></script>
 </body>

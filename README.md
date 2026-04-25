@@ -1,6 +1,6 @@
-# CodeSnap · Code Rendering for Blogs
+# CodeSnap Light · Code Rendering for Blogs & Social Media
 
-> **Version 1.1.1**
+> **Version 1.2.1**
 
 ---
 
@@ -15,12 +15,12 @@ Generate 4:3 landscape-format PNG images of code snippets with a minimalist IDE 
 ## Features
 
 - **Live Editor**: Paste your code and see it highlighted in real time.
-- **Multi-language syntax highlighting**: Select from 13 languages and get accurate token colors powered by [Prism.js](https://prismjs.com/).
-- **Custom filename**: Set your own IDE tab label — the file extension updates automatically based on the selected language.
-- **Real-time preview** of a mock IDE window.
+- **Multi-language syntax highlighting**: Select from 17 languages powered by [Prism.js](https://prismjs.com/).
+- **OS window chrome**: Switch between macOS, Windows, and Linux window styles.
+- **Theme selector**: 5 color palettes — GitHub Dark, Dracula, Nord, Monokai, One Dark.
+- **Custom filename**: Set your own IDE tab label — the file extension updates automatically.
 - **Dynamic resizing**: the window automatically resizes to display **all the code without vertical scrolling** while maintaining the 4:3 aspect ratio.
-- **Export to high-definition PNG** (2.5x scale) with a dark background and monospaced font.
-- **Minimalist dark theme** inspired by GitHub Dark.
+- **Export to high-definition PNG** (2.5x scale).
 - Fully static: powered by pure HTML, CSS, and JavaScript.
 
 ---
@@ -56,13 +56,39 @@ Generate 4:3 landscape-format PNG images of code snippets with a minimalist IDE 
 
 ---
 
+## Themes
+
+| Theme                  | Style                                          |
+|------------------------|------------------------------------------------|
+| GitHub Dark            | Default dark, muted blues                      |
+| Dracula                | Purple/pink, high contrast                     |
+| Nord                   | Arctic blues and greens                        |
+| Monokai                | Warm greens, vivid accents                     |
+| One Dark               | Atom-inspired, soft purples                    |
+| Rider (Darcula)        | JetBrains classic — orange keywords, muted green strings |
+| Visual Studio Dark     | Microsoft VS — blue keywords, salmon strings, teal types |
+
+All theme token colors are defined as CSS variables (`--syn-keyword`, `--syn-string`, etc.) in `styles.css`, making it easy to add new palettes.
+
+---
+
+## Window Chrome Styles
+
+| Style   | Description                                              |
+|---------|----------------------------------------------------------|
+| macOS   | Colored traffic-light dots on the left                   |
+| Windows | Flat minimize/maximize/close buttons on the right        |
+| Linux   | Monochrome circle buttons with symbols on the right      |
+
+---
+
 ## Project Structure
 
 ```
 /
-├── index.html      # Main structure
-├── styles.css      # Styles and Prism token overrides
-└── script.js       # Preview, highlighting, resizing, and export logic
+├── index.html      # Main structure and controls
+├── styles.css      # Themes, chrome styles, Prism token overrides
+└── script.js       # Highlighting, OS/theme switching, resize, export
 ```
 
 ---
@@ -81,10 +107,10 @@ Generate 4:3 landscape-format PNG images of code snippets with a minimalist IDE 
 ### Online use
 
 1. Go to [mherreravsquez.github.io/codesnap/](https://mherreravsquez.github.io/codesnap/)
-2. Select the language from the dropdown.
-3. Type a filename (the extension is added automatically).
-4. Paste your code into the left panel.
-5. View the preview in the right panel.
+2. Select the language and theme.
+3. Choose a window chrome style (macOS / Windows / Linux).
+4. Type a filename (the extension is added automatically).
+5. Paste your code into the left panel.
 6. Click **Export PNG** to download the image.
 
 ### Local Use
@@ -96,22 +122,31 @@ Generate 4:3 landscape-format PNG images of code snippets with a minimalist IDE 
    cd codesnap
    ```
 2. Open `index.html` in your browser.
-3. Select the language, set a filename, paste your code, and export.
 
 ---
 
 ## Customization
 
-You can modify the CSS variables in `styles.css` within the `:root` block to change colors, fonts, borders, or the aspect ratio (currently 4:3). Syntax token colors are also defined as CSS variables (`--syn-keyword`, `--syn-string`, etc.) so the palette is easy to swap out without touching individual token rules.
+CSS variables in `:root` and `body[data-theme="x"]` blocks control every color in the app. To add a new theme, copy any existing `body[data-theme]` block, give it a new name, update the variable values, and add a matching swatch button in `index.html`.
 
 ---
 
 ## Changelog
 
+### v1.2.1
+- Added **Rider (Darcula)** theme — JetBrains' classic dark palette with orange keywords, muted green strings, and amber function names.
+- Added **Visual Studio Dark** theme — Microsoft's VS palette with blue keywords, salmon strings, teal class names, and green comments.
+
+### v1.2.0
+- Added OS window chrome selector: macOS, Windows, and Linux styles.
+- Added theme selector with 5 palettes: GitHub Dark, Dracula, Nord, Monokai, One Dark.
+- All syntax token colors now driven by CSS variables — themes apply to Prism highlighting automatically.
+- Smooth `transition` on all color-bearing elements for instant live theme switching.
+
 ### v1.1.1
-- Added game development language support: GLSL, HLSL, GDScript, and Lua.
+- Added game development language support: GLSL, HLSL, GDScript, Lua.
 - Language dropdown now uses grouped sections (General / Game Development).
-- Added GLSL/HLSL-specific token overrides for preprocessor directives and qualifiers (`in`, `out`, `uniform`, `varying`).
+- Added GLSL/HLSL-specific token overrides for preprocessor directives and qualifiers.
 
 ### v1.1.0
 - Added multi-language syntax highlighting via Prism.js (13 languages).
@@ -128,7 +163,7 @@ You can modify the CSS variables in `styles.css` within the `:root` block to cha
 
 ## License
 
-This project is open source and free to use for any comercial or personal purpose. No attribution required, but it is appreciated.
+This project is open source and free to use for any streaming or personal purpose. No attribution required, but it is appreciated.
 
 ---
 
